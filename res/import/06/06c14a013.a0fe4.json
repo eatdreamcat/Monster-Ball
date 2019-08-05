@@ -1,0 +1,190 @@
+[
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "2002",
+      "texture": "baZv/3SiBP8KKnBet/knpx",
+      "rect": [
+        0,
+        0,
+        69,
+        103
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        69,
+        103
+      ],
+      "capInsets": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "Ball-2002",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "ball",
+      "_children": [
+        {
+          "__id__": 2
+        }
+      ],
+      "_level": 1,
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 1
+          },
+          "_spriteFrame": {
+            "__uuid__": "3dRiIgOHVE5I5nZWsm48C7"
+          }
+        },
+        {
+          "__type__": "cbde4kdX39M2qMC/gDXEsJg",
+          "node": {
+            "__id__": 1
+          },
+          "_gravityScale": 0,
+          "enabledContactListener": true
+        },
+        {
+          "__type__": "cc.PhysicsCircleCollider",
+          "node": {
+            "__id__": 1
+          },
+          "_friction": 0,
+          "_radius": 30
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "50pW11IcVFi4BVN7bay8LD"
+        },
+        "fileId": "a7qS4KkyxEGY3Ws3hcz2nZ"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 69,
+        "height": 103
+      },
+      "_scale": {
+        "__type__": "cc.Vec3",
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "groupIndex": 1
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "ae_fire1",
+      "_parent": {
+        "__id__": 1
+      },
+      "_level": 2,
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 2
+          },
+          "_spriteFrame": {
+            "__uuid__": "7b0gmMz/ZF26Ta2fbcuZkA"
+          }
+        },
+        {
+          "__type__": "cc.Animation",
+          "node": {
+            "__id__": 2
+          },
+          "_defaultClip": {
+            "__uuid__": "d3xU/g/fxIG5fa8nY6rIoY"
+          },
+          "_clips": [
+            {
+              "__uuid__": "d3xU/g/fxIG5fa8nY6rIoY"
+            }
+          ],
+          "playOnLoad": true
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "50pW11IcVFi4BVN7bay8LD"
+        },
+        "fileId": "2eSzGnIVtLIp6WXOfFvqFU"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 65,
+        "height": 32
+      },
+      "_position": {
+        "__type__": "cc.Vec3",
+        "y": -60
+      },
+      "_scale": {
+        "__type__": "cc.Vec3",
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "_rotationX": 90,
+      "_rotationY": 90,
+      "_quat": {
+        "__type__": "cc.Quat",
+        "z": -0.7071067811865475,
+        "w": 0.7071067811865476
+      }
+    }
+  ],
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "ae_fire1",
+      "texture": "e5HeP+/+xPFKPR9rtoJiab",
+      "rect": [
+        4,
+        3,
+        65,
+        32
+      ],
+      "offset": [
+        2,
+        -1
+      ],
+      "originalSize": [
+        69,
+        36
+      ],
+      "capInsets": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  }
+]
