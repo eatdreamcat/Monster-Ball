@@ -1,0 +1,97 @@
+[
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "Ball-2001",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "ball",
+      "_level": 1,
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 1
+          },
+          "_spriteFrame": {
+            "__uuid__": "8fdBPY7mxIBaSB4nMTDdu/"
+          }
+        },
+        {
+          "__type__": "cbde4kdX39M2qMC/gDXEsJg",
+          "node": {
+            "__id__": 1
+          },
+          "_linearDamping": 0.5,
+          "_angularVelocity": 0.2,
+          "enabledContactListener": true
+        },
+        {
+          "__type__": "cc.PhysicsCircleCollider",
+          "node": {
+            "__id__": 1
+          },
+          "_radius": 30
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "30rjM40FZA67WozNTCOM4S"
+        },
+        "fileId": "a7qS4KkyxEGY3Ws3hcz2nZ"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 90,
+        "height": 88
+      },
+      "_position": {
+        "__type__": "cc.Vec3",
+        "x": -45,
+        "y": 123
+      },
+      "_scale": {
+        "__type__": "cc.Vec3",
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "groupIndex": 1
+    }
+  ],
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "2001",
+      "texture": "41nA34jO5BMJD3IpWWnhFv",
+      "rect": [
+        0,
+        1,
+        90,
+        88
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        90,
+        90
+      ],
+      "capInsets": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  }
+]
