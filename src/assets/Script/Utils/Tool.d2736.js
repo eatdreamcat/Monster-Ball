@@ -1,1 +1,0 @@
-console.log=function(...t){},CMath={},CMath.Clamp=function(t,n,a){return Math.max(Math.min(t,n),a)},CMath.Distance=function(t,n){return Math.sqrt((t.x-n.x)*(t.x-n.x)+(t.y-n.y)*(t.y-n.y))},CAMERA_SHOW_ALL=!1;

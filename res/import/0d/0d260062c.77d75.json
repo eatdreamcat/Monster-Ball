@@ -1,0 +1,133 @@
+[
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "Item-3001",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "Item-3001",
+      "_level": 1,
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 1
+          },
+          "_spriteFrame": {
+            "__uuid__": "eaF4kKfVZNs4u5nClXl1SI"
+          }
+        },
+        {
+          "__type__": "b575eAMZaJP3IL3H96DDZtz",
+          "node": {
+            "__id__": 1
+          },
+          "_type": 0,
+          "enabledContactListener": true
+        },
+        {
+          "__type__": "c64fcoDOyNPZbGi3+VHD13I",
+          "node": {
+            "__id__": 1
+          },
+          "sampleCount": 300
+        },
+        {
+          "__type__": "cc.PhysicsPolygonCollider",
+          "node": {
+            "__id__": 1
+          },
+          "points": [
+            {
+              "__type__": "cc.Vec2",
+              "x": -96.3,
+              "y": -32.5
+            },
+            {
+              "__type__": "cc.Vec2",
+              "x": 47.7,
+              "y": -98.6
+            },
+            {
+              "__type__": "cc.Vec2",
+              "x": 99.3,
+              "y": 35.6
+            },
+            {
+              "__type__": "cc.Vec2",
+              "x": 52,
+              "y": 94.2
+            },
+            {
+              "__type__": "cc.Vec2",
+              "x": -28,
+              "y": 91.7
+            },
+            {
+              "__type__": "cc.Vec2",
+              "x": -85.9,
+              "y": 48.4
+            }
+          ]
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "d0DA5z2LdJUr0G6IQlTBzZ"
+        },
+        "fileId": "5eS9Jz+zhMWKWiTRgdHGKW"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 200,
+        "height": 198
+      },
+      "_position": {
+        "__type__": "cc.Vec3",
+        "x": -141
+      },
+      "_scale": {
+        "__type__": "cc.Vec3",
+        "x": 0.8,
+        "y": 0.8,
+        "z": 1
+      },
+      "groupIndex": 3
+    }
+  ],
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "icon_hat",
+      "texture": "bacox4lflKNJQ9ifyVvn1r",
+      "rect": [
+        0,
+        1,
+        200,
+        198
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        200,
+        200
+      ],
+      "capInsets": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  }
+]
