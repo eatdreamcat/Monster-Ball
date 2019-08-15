@@ -3721,6 +3721,8 @@ window.__require = function e(t, n, r) {
         var sprite = this.getComponent(cc.Sprite);
         var spine = this.getComponent(sp.Skeleton);
         var label = this.getComponent(cc.Label);
+        this.material.setDefine("disableColor", true);
+        this.spineMaterial.setDefine("disableColor", true);
         this.material.setProperty("sampleCount", this.sampleCount);
         this.spineMaterial.setProperty("sampleCount", this.sampleCount);
         if (sprite) {
@@ -3743,8 +3745,6 @@ window.__require = function e(t, n, r) {
         var sprite = this.getComponent(cc.Sprite);
         var spine = this.getComponent(sp.Skeleton);
         var label = this.getComponent(cc.Label);
-        this.material.setProperty("sampleCount", this.sampleCount);
-        this.spineMaterial.setProperty("sampleCount", this.sampleCount);
         if (sprite && this.oldMaterial) {
           sprite["_spriteMaterial"] = this.oldMaterial;
           sprite["_activateMaterial"]();
@@ -4354,6 +4354,9 @@ window.__require = function e(t, n, r) {
           name: "useModel",
           value: false
         }, {
+          name: "disableColor",
+          value: false
+        }, {
           name: "useColor",
           value: true
         } ]);
@@ -4451,6 +4454,9 @@ window.__require = function e(t, n, r) {
         }, [ {
           name: "useModel",
           value: true
+        }, {
+          name: "disableColor",
+          value: false
         }, {
           name: "alphaTest",
           value: false
@@ -4601,7 +4607,7 @@ window.__require = function e(t, n, r) {
     }, {
       name: "pixel_style",
       vert: "\n    uniform mat4 viewProj;\n    attribute vec3 a_position;\n    attribute lowp vec4 a_color;\n    #ifdef useModel \n        uniform mat4 model;\n    #endif\n    #ifdef useTexture\n        attribute mediump vec2 a_uv0;  \n        varying mediump vec2 uv0;\n    #endif\n    #ifndef useColor \n        varying lowp vec4 v_fragmentColor;\n    #endif\n    void main () {\n        mat4 mvp;\n        #ifdef useModel\n             mvp = viewProj * model;\n        #else\n             mvp = viewProj;  \n        #endif  \n        vec4 pos = mvp * vec4(a_position, 1);\n        #ifndef useColor\n             v_fragmentColor = a_color;\n        #endif\n        #ifdef useTexture    \n             uv0 = a_uv0;  \n        #endif  \n        gl_Position = pos;\n    }",
-      frag: "\n    uniform float sampleCount;\n    #ifdef useTexture  \n        uniform sampler2D texture;  \n        varying mediump vec2 uv0;\n    #endif\n    #ifdef useColor\n        uniform lowp vec4 color;\n    #else  \n        varying lowp vec4 v_fragmentColor;\n    #endif\n    void main () {  \n        #ifdef useColor    \n             vec4 o = color;\n        #else\n             vec4 o = v_fragmentColor;  \n        #endif  \n        #ifdef useTexture    \n             vec2 uv_temp = uv0;\n             float count = 1.0 / sampleCount;\n\n             float i = floor(uv0.x / count);\n             float j = floor(uv0.y / count);\n             float startX = count * i;\n             float endX = startX + count;\n             float pointX = (startX + endX) / 2.0;\n             \n\n             float startY = count * j;\n             float endY= startY + count;\n             float pointY = (startY + endY) / 2.0;\n             \n             if (uv0.x > startX && uv0.x < endX && uv0.y > startY && uv0.y < endY) {\n                uv_temp.x = pointX;\n                uv_temp.y = pointY;\n            }\n             o *= texture2D(texture, uv_temp); \n        #endif  \n        gl_FragColor = o;\n    }",
+      frag: "\n    uniform float sampleCount;\n    #ifdef useTexture  \n        uniform sampler2D texture;  \n        varying mediump vec2 uv0;\n    #endif\n    #ifdef useColor\n        uniform lowp vec4 color;\n    #else  \n        varying lowp vec4 v_fragmentColor;\n    #endif\n    void main () {  \n        #ifdef useColor    \n             vec4 o = color;\n        #else\n             vec4 o = v_fragmentColor;  \n        #endif  \n        #ifdef useTexture    \n             vec2 uv_temp = uv0;\n             float count = 1.0 / sampleCount;\n\n             float i = floor(uv0.x / count);\n             float j = floor(uv0.y / count);\n             float startX = count * i;\n             float endX = startX + count;\n             float pointX = (startX + endX) / 2.0;\n             \n\n             float startY = count * j;\n             float endY= startY + count;\n             float pointY = (startY + endY) / 2.0;\n             \n             if (uv0.x > startX && uv0.x < endX && uv0.y > startY && uv0.y < endY) {\n                uv_temp.x = pointX;\n                uv_temp.y = pointY;\n            }\n             o *= texture2D(texture, uv_temp); \n             #ifdef disableColor  \n                 float av = (o.r+o.g+o.b) / 3.0;  \n                 o.r = av;\n                 o.g = av;\n                 o.b = av;\n            #endif  \n        #endif  \n        gl_FragColor = o;\n    }",
       defines: [ {
         name: "useModel"
       }, {
@@ -4612,7 +4618,7 @@ window.__require = function e(t, n, r) {
     }, {
       name: "spine_pxiel",
       vert: "\n    uniform mat4 viewProj;\n    #ifdef use2DPos\n      attribute vec2 a_position;\n    #else\n      attribute vec3 a_position;\n    #endif\n    attribute lowp vec4 a_color;\n    #ifdef useTint\n      attribute lowp vec4 a_color0;\n    #endif\n    #ifdef useModel  \n      uniform mat4 model;\n    #endif\n    attribute mediump vec2 a_uv0;\n    varying mediump vec2 uv0;\n    varying lowp vec4 v_light;\n    #ifdef useTint  \n      varying lowp vec4 v_dark;\n    #endif\n    void main () {\n        mat4 mvp;\n        #ifdef useModel    \n           mvp = viewProj * model;  \n        #else    \n           mvp = viewProj;  \n        #endif\n        #ifdef use2DPos  \n           vec4 pos = mvp * vec4(a_position, 0, 1);\n        #else  \n           vec4 pos = mvp * vec4(a_position, 1);  \n        #endif  \n        v_light = a_color;  \n        #ifdef useTint    \n           v_dark = a_color0;  \n        #endif  \n        uv0 = a_uv0;  \n        gl_Position = pos;\n    }",
-      frag: "\n        uniform float sampleCount;\n        uniform sampler2D texture;\n        varying mediump vec2 uv0;\n        #ifdef alphaTest  \n           uniform lowp float alphaThreshold;\n        #endif\n        varying lowp vec4 v_light;\n        #ifdef useTint\n           varying lowp vec4 v_dark;\n        #endif\n        void main () {\n                vec2 uv_temp = uv0;\n                float count = 1.0 / sampleCount;\n\n                float i = floor(uv0.x / count);\n                float j = floor(uv0.y / count);\n                float startX = count * i;\n                float endX = startX + count;\n                float pointX = (startX + endX) / 2.0;\n             \n\n                float startY = count * j;\n                float endY= startY + count;\n                float pointY = (startY + endY) / 2.0;\n             \n                if (uv0.x > startX && uv0.x < endX && uv0.y > startY && uv0.y < endY) {\n                   uv_temp.x = pointX;\n                   uv_temp.y = pointY;\n                }\n\n                vec4 texColor = texture2D(texture, uv_temp);\n                vec4 finalColor;  \n                #ifdef useTint\n                    finalColor.a = v_light.a * texColor.a;    \n                    finalColor.rgb = ((texColor.a - 1.0) * v_dark.a + 1.0 - texColor.rgb) * v_dark.rgb + texColor.rgb * v_light.rgb;  \n                #else\n                    finalColor = texColor * v_light;\n                #endif  \n                #ifdef alphaTest    \n                    if (finalColor.a <= alphaThreshold)      \n                        discard;  \n                #endif  \n                gl_FragColor = finalColor;\n        }",
+      frag: "\n        uniform float sampleCount;\n        uniform sampler2D texture;\n        varying mediump vec2 uv0;\n        #ifdef alphaTest  \n           uniform lowp float alphaThreshold;\n        #endif\n        varying lowp vec4 v_light;\n        #ifdef useTint\n           varying lowp vec4 v_dark;\n        #endif\n        void main () {\n                vec2 uv_temp = uv0;\n                float count = 1.0 / sampleCount;\n\n                float i = floor(uv0.x / count);\n                float j = floor(uv0.y / count);\n                float startX = count * i;\n                float endX = startX + count;\n                float pointX = (startX + endX) / 2.0;\n             \n\n                float startY = count * j;\n                float endY= startY + count;\n                float pointY = (startY + endY) / 2.0;\n             \n                if (uv0.x > startX && uv0.x < endX && uv0.y > startY && uv0.y < endY) {\n                   uv_temp.x = pointX;\n                   uv_temp.y = pointY;\n                }\n\n                vec4 texColor = texture2D(texture, uv_temp);\n                vec4 finalColor;  \n                #ifdef useTint\n                    finalColor.a = v_light.a * texColor.a;    \n                    finalColor.rgb = ((texColor.a - 1.0) * v_dark.a + 1.0 - texColor.rgb) * v_dark.rgb + texColor.rgb * v_light.rgb;  \n                #else\n                    finalColor = texColor * v_light;\n                #endif  \n                #ifdef alphaTest    \n                    if (finalColor.a <= alphaThreshold)      \n                        discard;  \n                #endif  \n                #ifdef disableColor    \n                    float av = (finalColor.r+finalColor.g+finalColor.b) / 3.0;  \n                    finalColor.r = av;\n                    finalColor.g = av;\n                    finalColor.b = av;\n                #endif  \n                gl_FragColor = finalColor;\n        }",
       defines: [ {
         name: "useModel"
       }, {
@@ -4634,6 +4640,7 @@ window.__require = function e(t, n, r) {
     var TableMgr = function() {
       function TableMgr() {
         this.load = TableMgr.JSON_URL && "" != TableMgr.JSON_URL ? cc.loader.load.bind(cc.loader) : cc.loader.loadRes.bind(cc.loader);
+        this.fileFormat = TableMgr.JSON_URL && "" != TableMgr.JSON_URL ? ".json?time=" + Date.now() : "";
         this.total = 0;
         this.complete = 0;
         this.Monster_ball__monster = {};
@@ -4654,11 +4661,12 @@ window.__require = function e(t, n, r) {
         this.completeCallback = complete;
         this.progressCallback = progress;
         var self = this;
-        this.load(TableMgr.JSON_URL + url.trim().split("/").join("") + "/file_list", function(err, JsonAsset) {
-          if (err) console.error(err); else {
-            this.total = JsonAsset.json.length;
-            for (var _i = 0, _a = JsonAsset.json; _i < _a.length; _i++) {
-              var jsonFile = _a[_i];
+        this.load(TableMgr.JSON_URL + url.trim().split("/").join("") + "/file_list" + this.fileFormat, function(err, JsonAsset) {
+          if (err) console.error(err.errorMessage); else {
+            var jsonArray = "Array" == JsonAsset.constructor["name"] ? JsonAsset : JsonAsset.json;
+            this.total = jsonArray.length;
+            for (var _i = 0, jsonArray_1 = jsonArray; _i < jsonArray_1.length; _i++) {
+              var jsonFile = jsonArray_1[_i];
               self.loadJson(url.trim().split("/").join("") + "/" + jsonFile.replace(".json", ""));
             }
           }
@@ -4667,11 +4675,13 @@ window.__require = function e(t, n, r) {
       TableMgr.prototype.loadJson = function(url) {
         console.log("start load:" + url);
         var self = this;
-        this.load(TableMgr.JSON_URL + url, function(err, JsonAsset) {
-          if (err) console.error(err); else {
-            for (var _i = 0, _a = JsonAsset.json; _i < _a.length; _i++) {
-              var json = _a[_i];
-              self[JsonAsset.name][json["ID"]] = json;
+        var tableName = url.split("/")[1];
+        this.load(TableMgr.JSON_URL + url + this.fileFormat, function(err, JsonAsset) {
+          if (err) console.error(err.errorMessage); else {
+            var jsonArray = "Array" == JsonAsset.constructor["name"] ? JsonAsset : JsonAsset.json;
+            for (var _i = 0, jsonArray_2 = jsonArray; _i < jsonArray_2.length; _i++) {
+              var json = jsonArray_2[_i];
+              self[tableName][json["ID"]] = json;
             }
             self.completeLoad();
           }
