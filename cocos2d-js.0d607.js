@@ -3835,12 +3835,14 @@
   13: [ (function(require, module, exports) {
     var js = cc.js;
     var AnimationManager = cc.Class({
+      stop: false,
       ctor: function() {
         this._anims = new js.array.MutableForwardIterator([]);
         this._delayEvents = [];
         cc.director._scheduler && cc.director._scheduler.enableForTarget(this);
       },
       update: function(dt) {
+        if (this.stop) return;
         var iterator = this._anims;
         var array = iterator.array;
         for (iterator.i = 0; iterator.i < array.length; ++iterator.i) {
@@ -3853,6 +3855,9 @@
           event.target[event.func].apply(event.target, event.args);
         }
         events.length = 0;
+      },
+      setStop: function(isStop) {
+        this.stop = isStop;
       },
       destruct: function() {},
       addAnimation: function(anim) {

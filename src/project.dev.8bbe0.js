@@ -400,11 +400,13 @@ window.__require = function e(t, n, r) {
         EventManager_1.gEventMgr.emit(EventName_1.GlobalEvent.PRE_SELECT_BALL, this.ballInfo.ID);
       };
       BallTab.prototype.onTouchStart = function(event) {
+        if (GUIDE) return;
         if (!this.Button.enabled || Game_1.Game.getBallNumber(this.ballInfo.ID) <= 0) return;
         this.preSelect();
         this.node.zIndex = cc.macro.MAX_ZINDEX;
       };
       BallTab.prototype.onTouchMove = function(event) {
+        if (GUIDE) return;
         if (!this.Button.interactable) return;
         var iconLocal = this.node.convertToNodeSpaceAR(event.getLocation());
         var rocketlocal = this.RocketRange.node.convertToNodeSpaceAR(event.getLocation());
@@ -450,6 +452,7 @@ window.__require = function e(t, n, r) {
         this.ballInfo.form == table_1.Monster_ball_ball_form.ZhaDan && (this.RocketRange.node.active = false);
       };
       BallTab.prototype.onTouchCancel = function(event) {
+        if (GUIDE) return;
         if (!this.Button.interactable) return;
         CameraController_1.gCamera.canZoomOut = true;
         if (!this.isReady) {
@@ -638,45 +641,6 @@ window.__require = function e(t, n, r) {
     "./BuffManager": "BuffManager",
     "./Game": "Game"
   } ],
-  BaseScene: [ function(require, module, exports) {
-    "use strict";
-    cc._RF.push(module, "07e9084SKFEuJNZQVjlVclA", "BaseScene");
-    Object.defineProperty(exports, "__esModule", {
-      value: true
-    });
-    var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
-    var BaseScene = function(_super) {
-      __extends(BaseScene, _super);
-      function BaseScene() {
-        return null !== _super && _super.apply(this, arguments) || this;
-      }
-      BaseScene.prototype.showUI = function(url, pos) {
-        void 0 === pos && (pos = cc.v2(0, 0));
-        var self = this;
-        var nodeName = url.split("/").join("_");
-        this.node.getChildByName(nodeName) ? console.warn("\u754c\u9762\u5df2\u663e\u793a:" + url) : cc.loader.loadRes(url, cc.Prefab, function(err, prefab) {
-          if (err) console.error(err); else {
-            var prefabNode = cc.instantiate(prefab);
-            prefabNode.setPosition(pos);
-            self.node.addChild(prefabNode, 1, nodeName);
-          }
-        });
-      };
-      BaseScene.prototype.closeUI = function(url, release) {
-        void 0 === release && (release = false);
-        var nodeName = url.split("/").join("_");
-        var child = this.node.getChildByName(nodeName);
-        if (child) {
-          child.removeFromParent(true);
-          release && cc.loader.releaseRes(url);
-        }
-      };
-      BaseScene = __decorate([ ccclass ], BaseScene);
-      return BaseScene;
-    }(cc.Component);
-    exports.default = BaseScene;
-    cc._RF.pop();
-  }, {} ],
   BossGodzimora: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "41a0dWPcVhI2oULmMmcubZg", "BossGodzimora");
@@ -773,6 +737,7 @@ window.__require = function e(t, n, r) {
       BossGodzimora.prototype.onLoad = function() {};
       BossGodzimora.prototype.start = function() {};
       BossGodzimora.prototype.update = function(dt) {
+        if (GUIDE) return;
         if (!this.monster) return;
         if (this.monster.CanMove) {
           this.Spine.move();
@@ -895,6 +860,7 @@ window.__require = function e(t, n, r) {
       BossZai.prototype.onLoad = function() {};
       BossZai.prototype.start = function() {};
       BossZai.prototype.update = function(dt) {
+        if (GUIDE) return;
         if (!this.monster) return;
         if (1 == this.monster.Stage) {
           this.node.setPosition(-1290, -295);
@@ -1270,7 +1236,9 @@ window.__require = function e(t, n, r) {
           EventManager_1.gEventMgr.emit(EventName_1.GlobalEvent.PXIEL_ENABLE);
         }, this);
       };
-      DebugUI.prototype.start = function() {};
+      DebugUI.prototype.start = function() {
+        this.node.zIndex = cc.macro.MAX_ZINDEX;
+      };
       __decorate([ property(cc.Button) ], DebugUI.prototype, "close", void 0);
       __decorate([ property(cc.Toggle) ], DebugUI.prototype, "showAll", void 0);
       __decorate([ property(cc.Toggle) ], DebugUI.prototype, "invincibel", void 0);
@@ -1690,7 +1658,6 @@ window.__require = function e(t, n, r) {
     Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var BaseScene_1 = require("./BaseScene");
     var Config_1 = require("../Config/Config");
     var Game_1 = require("../Game/Game");
     var EventName_1 = require("../Event/EventName");
@@ -1699,6 +1666,7 @@ window.__require = function e(t, n, r) {
     var GameFactory_1 = require("../Factory/GameFactory");
     var table_1 = require("../table");
     var Background_1 = require("./Background");
+    var UIManager_1 = require("../Controller/UIManager");
     var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
     var GameScene = function(_super) {
       __extends(GameScene, _super);
@@ -1735,7 +1703,13 @@ window.__require = function e(t, n, r) {
         this.initPhysic();
         this.initEvent();
         this.LoadingBlock.active = true;
-        this.showUI("Prefabs/MainUI");
+        UIManager_1.UIMgr.bindRoot(this.node);
+        UIManager_1.UIMgr.showUI("Prefabs/MainUI");
+        if (cc.sys.localStorage.getItem("guide")) GUIDE = false; else {
+          GUIDE = true;
+          cc.director.getAnimationManager().setStop(true);
+          UIManager_1.UIMgr.showUI("Prefabs/StroyUI");
+        }
         (true, true) && (window["GameScene"] = this);
       };
       GameScene.prototype.start = function() {};
@@ -1752,11 +1726,11 @@ window.__require = function e(t, n, r) {
         EventManager_1.gEventMgr.on(EventName_1.GlobalEvent.GAME_OVER, this.gameOver, this);
         EventManager_1.gEventMgr.on(EventName_1.GlobalEvent.ADD_ITEM, this.addItem, this);
         EventManager_1.gEventMgr.on(EventName_1.GlobalEvent.OPEN_DEBUG, function() {
-          _this.showUI("Prefabs/Debug", cc.v2(cc.winSize.width / 2, cc.winSize.height / 2));
+          UIManager_1.UIMgr.showUI("Prefabs/Debug", cc.v2(cc.winSize.width / 2, cc.winSize.height / 2));
         }, this);
       };
       GameScene.prototype.gameOver = function() {
-        this.showUI("Prefabs/OverLayer");
+        UIManager_1.UIMgr.showUI("Prefabs/OverLayer");
       };
       GameScene.prototype.updateMonsters = function() {
         var _this = this;
@@ -1854,19 +1828,19 @@ window.__require = function e(t, n, r) {
       __decorate([ property(cc.Camera) ], GameScene.prototype, "UICamera", void 0);
       GameScene = __decorate([ ccclass ], GameScene);
       return GameScene;
-    }(BaseScene_1.default);
+    }(cc.Component);
     exports.default = GameScene;
     cc._RF.pop();
   }, {
     "../Config/Config": "Config",
     "../Controller/CameraController": "CameraController",
+    "../Controller/UIManager": "UIManager",
     "../Event/EventManager": "EventManager",
     "../Event/EventName": "EventName",
     "../Factory/GameFactory": "GameFactory",
     "../Game/Game": "Game",
     "../table": "table",
-    "./Background": "Background",
-    "./BaseScene": "BaseScene"
+    "./Background": "Background"
   } ],
   Game: [ function(require, module, exports) {
     "use strict";
@@ -2166,6 +2140,7 @@ window.__require = function e(t, n, r) {
         return false;
       };
       GameMgr.prototype.update = function(dt) {
+        if (GUIDE) return;
         if (!this.isRunning) return;
         if (this.checkNextLevel()) return;
         this.buff.update(dt);
@@ -2505,6 +2480,7 @@ window.__require = function e(t, n, r) {
       HorizontalMovement.prototype.start = function() {};
       HorizontalMovement.prototype.update = function(dt) {
         var _this = this;
+        if (GUIDE) return;
         if (!this.monster) return;
         if (!(cc.director.getTotalFrames() % 300)) {
           var buffOpt = {
@@ -2792,6 +2768,7 @@ window.__require = function e(t, n, r) {
           break;
 
          case table_1.Monster_ball_prop_form.QuanBuGuaiWuTingDun:
+          this.Animation.playAdditive("splash");
           callback();
           break;
 
@@ -2852,6 +2829,9 @@ window.__require = function e(t, n, r) {
         this.Wainning.active = false;
         cc.director.once(cc.Director.EVENT_AFTER_UPDATE, Game_1.Game.start, Game_1.Game);
       };
+      MainUI.prototype.start = function() {
+        this.node.zIndex = cc.macro.MAX_ZINDEX - 100;
+      };
       MainUI.prototype.initDebug = function() {
         this.Debug.active = true;
         this.Debug.getChildByName("DebugButton").on(cc.Node.EventType.TOUCH_END, function() {
@@ -2895,6 +2875,7 @@ window.__require = function e(t, n, r) {
         }
       };
       MainUI.prototype.onTouched = function(touch) {
+        if (GUIDE) return;
         EventManager_1.gEventMgr.emit(EventName_1.GlobalEvent.JUMP, Game_1.Game.curBall ? Game_1.Game.curBall.BallID : 0, touch.getLocationX() > cc.winSize.width / 2 ? Config_1.JUMP_DIR.RIGHT : Config_1.JUMP_DIR.LEFT);
       };
       MainUI.prototype.updateProgress = function(percent, total) {
@@ -2910,7 +2891,6 @@ window.__require = function e(t, n, r) {
         total < 0 && (total = 0);
         null != total && (this.greenHpBar.width = this.HpProgressBar.totalLength * total);
       };
-      MainUI.prototype.start = function() {};
       MainUI.prototype.update = function(dt) {};
       __decorate([ property(cc.ProgressBar) ], MainUI.prototype, "HpProgressBar", void 0);
       __decorate([ property(cc.Node) ], MainUI.prototype, "greenHpBar", void 0);
@@ -3009,6 +2989,7 @@ window.__require = function e(t, n, r) {
         this.monster.realMoveType == MoveType.Teleport && (this.weaknessRoot.active = true);
       };
       MonsterCtrl.prototype.update = function(dt) {
+        if (GUIDE) return;
         Math.abs(this.node.scaleX) < 1 && (this.node.scaleX = this.node.scaleX > 0 ? 1 : -1);
         if (!this.monster) {
           this.animation.stop();
@@ -3354,6 +3335,7 @@ window.__require = function e(t, n, r) {
         this.idle();
       };
       MonsterSpine.prototype.update = function(dt) {
+        if (GUIDE) return;
         if (!this.monster && "die fuck monster" != this.node.name) return;
         if (this.monster && this.monster.State & Monster_1.MonsterState.NUMB) return;
         var action = this.node.getActionByTag(Monster_1.MonsterState.INVINCIBLE);
@@ -3666,7 +3648,6 @@ window.__require = function e(t, n, r) {
     Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var BaseScene_1 = require("./BaseScene");
     var ShaderManager_1 = require("../Shader/ShaderManager");
     var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
     var OverScene = function(_super) {
@@ -3686,12 +3667,11 @@ window.__require = function e(t, n, r) {
       __decorate([ property(cc.Label) ], OverScene.prototype, "label", void 0);
       OverScene = __decorate([ ccclass ], OverScene);
       return OverScene;
-    }(BaseScene_1.default);
+    }(cc.Component);
     exports.default = OverScene;
     cc._RF.pop();
   }, {
-    "../Shader/ShaderManager": "ShaderManager",
-    "./BaseScene": "BaseScene"
+    "../Shader/ShaderManager": "ShaderManager"
   } ],
   PixelSprite: [ function(require, module, exports) {
     "use strict";
@@ -3726,8 +3706,8 @@ window.__require = function e(t, n, r) {
         var sprite = this.getComponent(cc.Sprite);
         var spine = this.getComponent(sp.Skeleton);
         var label = this.getComponent(cc.Label);
-        this.material.setDefine("disableColor", true);
-        this.spineMaterial.setDefine("disableColor", true);
+        this.material.setDefine("disableColor", false);
+        this.spineMaterial.setDefine("disableColor", false);
         this.material.setProperty("sampleCount", this.sampleCount);
         this.spineMaterial.setProperty("sampleCount", this.sampleCount);
         if (sprite) {
@@ -4636,6 +4616,57 @@ window.__require = function e(t, n, r) {
     } ];
     cc._RF.pop();
   }, {} ],
+  StroyUI: [ function(require, module, exports) {
+    "use strict";
+    cc._RF.push(module, "df0b4qzIPhAM5hf2JD+zeGB", "StroyUI");
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+    var StroyUI = function(_super) {
+      __extends(StroyUI, _super);
+      function StroyUI() {
+        var _this = null !== _super && _super.apply(this, arguments) || this;
+        _this.scroller = null;
+        _this.time = 0;
+        _this.index = 0;
+        return _this;
+      }
+      StroyUI.prototype.onLoad = function() {
+        this.scroller.scrollToLeft(this.index);
+        for (var _i = 0, _a = this.scroller.content.children; _i < _a.length; _i++) {
+          var item = _a[_i];
+          item.on(cc.Node.EventType.TOUCH_END, this.nextPic, this);
+          var skip = item.getChildByName("Skip");
+          skip.on(cc.Node.EventType.TOUCH_END, this.endGuide, this);
+        }
+      };
+      StroyUI.prototype.start = function() {
+        this.node.zIndex = cc.macro.MAX_ZINDEX - 10;
+      };
+      StroyUI.prototype.update = function(dt) {
+        this.time += dt;
+        this.time > 3 && this.nextPic();
+      };
+      StroyUI.prototype.nextPic = function() {
+        this.time = 0;
+        this.index++;
+        this.scroller.scrollTo(cc.v2(1 / 3 * this.index, 0), .5);
+        this.index > 3 && this.endGuide();
+      };
+      StroyUI.prototype.endGuide = function() {
+        this.node.removeFromParent(true);
+        cc.sys.localStorage.setItem("guide", true);
+        cc.director.getAnimationManager().setStop(false);
+        GUIDE = false;
+      };
+      __decorate([ property(cc.ScrollView) ], StroyUI.prototype, "scroller", void 0);
+      StroyUI = __decorate([ ccclass ], StroyUI);
+      return StroyUI;
+    }(cc.Component);
+    exports.default = StroyUI;
+    cc._RF.pop();
+  }, {} ],
   TableMgr: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "25685du2JVGR48ndlFQxrEJ", "TableMgr");
@@ -4819,6 +4850,7 @@ window.__require = function e(t, n, r) {
         this.enabled = this.monster.realMoveType == MonsterCtrl_1.MoveType.Teleport && this.monster.Type != table_1.Monster_ball__monster_monster.BOSS;
       };
       TeleportMovement.prototype.update = function(dt) {
+        if (GUIDE) return;
         if (!this.monster) return;
         if (this.monster.State & Monster_1.MonsterState.NUMB) return;
         this.moveCD += dt;
@@ -4943,6 +4975,60 @@ window.__require = function e(t, n, r) {
     "../Event/EventName": "EventName",
     "./ShaderManager": "ShaderManager"
   } ],
+  UIManager: [ function(require, module, exports) {
+    "use strict";
+    cc._RF.push(module, "f3f43iFKdhKGq/CIL1C8pay", "UIManager");
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    var UIManager = function() {
+      function UIManager() {}
+      Object.defineProperty(UIManager, "inst", {
+        get: function() {
+          return this.ins ? this.ins : this.ins = new UIManager();
+        },
+        enumerable: true,
+        configurable: true
+      });
+      UIManager.prototype.bindRoot = function(root) {
+        this.root = root;
+      };
+      UIManager.prototype.showUI = function(url, pos) {
+        void 0 === pos && (pos = cc.v2(0, 0));
+        if (!this.root || !this.root.isValid) {
+          console.error(" UI ROOT INVALD!");
+          return;
+        }
+        var self = this;
+        var nodeName = url.split("/").join("_");
+        this.root.getChildByName(nodeName) ? console.warn("\u754c\u9762\u5df2\u663e\u793a:" + url) : cc.loader.loadRes(url, cc.Prefab, function(err, prefab) {
+          if (err) console.error(err); else {
+            console.log("\u663e\u793a\u754c\u9762:" + nodeName);
+            var prefabNode = cc.instantiate(prefab);
+            prefabNode.setPosition(pos);
+            prefabNode.name = nodeName;
+            self.root.addChild(prefabNode);
+          }
+        });
+      };
+      UIManager.prototype.closeUI = function(url, release) {
+        void 0 === release && (release = false);
+        if (!this.root || !this.root.isValid) {
+          console.error(" UI ROOT INVALD!");
+          return;
+        }
+        var nodeName = url.split("/").join("_");
+        var child = this.root.getChildByName(nodeName);
+        if (child) {
+          child.removeFromParent(true);
+          release && cc.loader.releaseRes(url);
+        }
+      };
+      return UIManager;
+    }();
+    exports.UIMgr = UIManager.inst;
+    cc._RF.pop();
+  }, {} ],
   WaveSprite: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "8b316Iw6W5OFqaeK8iUMK9S", "WaveSprite");
@@ -5057,7 +5143,6 @@ window.__require = function e(t, n, r) {
     Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    var BaseScene_1 = require("./BaseScene");
     var HashMap_1 = require("../Utils/HashMap");
     var Config_1 = require("../Config/Config");
     var TableMgr_1 = require("../TableMgr");
@@ -5161,7 +5246,7 @@ window.__require = function e(t, n, r) {
       __decorate([ property(cc.Label) ], WelcomeScene.prototype, "percentLabel", void 0);
       WelcomeScene = __decorate([ ccclass ], WelcomeScene);
       return WelcomeScene;
-    }(BaseScene_1.default);
+    }(cc.Component);
     exports.default = WelcomeScene;
     cc._RF.pop();
   }, {
@@ -5170,8 +5255,7 @@ window.__require = function e(t, n, r) {
     "../Factory/GameFactory": "GameFactory",
     "../Shader/ShaderManager": "ShaderManager",
     "../TableMgr": "TableMgr",
-    "../Utils/HashMap": "HashMap",
-    "./BaseScene": "BaseScene"
+    "../Utils/HashMap": "HashMap"
   } ],
   table: [ function(require, module, exports) {
     "use strict";
@@ -5225,4 +5309,4 @@ window.__require = function e(t, n, r) {
     })(Monster_ball_prop_form = exports.Monster_ball_prop_form || (exports.Monster_ball_prop_form = {}));
     cc._RF.pop();
   }, {} ]
-}, {}, [ "BallCtrl", "Item", "Config", "AudioController", "CameraController", "Effect", "EventManager", "EventName", "GameFactory", "Ball", "BuffManager", "Game", "Monster", "BossGodzimora", "BossZai", "HorizontalMovement", "MonsterCtrl", "MonsterSpine", "TeleportMovement", "Weakness", "Background", "BaseScene", "GameScene", "OverScene", "WelcomeScene", "ButterFlySpring", "PixelSprite", "PointWave", "ShaderManager", "ShaderTemplate", "TransitionMask", "TransitionSprite", "WaveSprite", "TableMgr", "BallTab", "Debug", "MainUI", "OverLayer", "HashMap", "table" ]);
+}, {}, [ "BallCtrl", "Item", "Config", "AudioController", "CameraController", "UIManager", "Effect", "EventManager", "EventName", "GameFactory", "Ball", "BuffManager", "Game", "Monster", "BossGodzimora", "BossZai", "HorizontalMovement", "MonsterCtrl", "MonsterSpine", "TeleportMovement", "Weakness", "Background", "GameScene", "OverScene", "WelcomeScene", "ButterFlySpring", "PixelSprite", "PointWave", "ShaderManager", "ShaderTemplate", "TransitionMask", "TransitionSprite", "WaveSprite", "TableMgr", "BallTab", "Debug", "MainUI", "OverLayer", "StroyUI", "HashMap", "table" ]);

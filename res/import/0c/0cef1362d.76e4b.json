@@ -1105,6 +1105,62 @@
     }
   },
   {
+    "__type__": "cc.AnimationClip",
+    "_name": "splash",
+    "_duration": 1,
+    "curveData": {
+      "paths": {
+        "Splash": {
+          "props": {
+            "opacity": [
+              {
+                "frame": 0,
+                "value": 255
+              },
+              {
+                "frame": 0.3333333333333333,
+                "value": 255
+              },
+              {
+                "frame": 1,
+                "value": 0
+              }
+            ],
+            "color": [
+              {
+                "frame": 0,
+                "value": {
+                  "__type__": "cc.Color",
+                  "r": 187,
+                  "g": 186,
+                  "b": 186
+                }
+              },
+              {
+                "frame": 0.3333333333333333,
+                "value": {
+                  "__type__": "cc.Color",
+                  "r": 255,
+                  "g": 255,
+                  "b": 255
+                }
+              },
+              {
+                "frame": 1,
+                "value": {
+                  "__type__": "cc.Color",
+                  "r": 210,
+                  "g": 210,
+                  "b": 210
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
     "__type__": "cc.SpriteFrame",
     "content": {
       "name": "bg_score_back",
@@ -1176,6 +1232,9 @@
         },
         {
           "__id__": 238
+        },
+        {
+          "__id__": 239
         }
       ],
       "_level": 1,
@@ -1207,16 +1266,16 @@
             "__id__": 16
           },
           "Top": {
-            "__id__": 237
-          },
-          "Bottom": {
             "__id__": 238
           },
+          "Bottom": {
+            "__id__": 239
+          },
           "Left": {
-            "__id__": 235
+            "__id__": 236
           },
           "Right": {
-            "__id__": 236
+            "__id__": 237
           },
           "Wainning": {
             "__id__": 157
@@ -1246,6 +1305,9 @@
             },
             {
               "__uuid__": "68SX+GYDdOao9Kn+9Yi+Qn"
+            },
+            {
+              "__uuid__": "782WWifzBNjImfEGhrWzVa"
             }
           ]
         }
@@ -12013,8 +12075,7 @@
     },
     {
       "__type__": "cc.Node",
-      "_name": "Left",
-      "_objFlags": 512,
+      "_name": "Splash",
       "_parent": {
         "__id__": 1
       },
@@ -12026,7 +12087,7 @@
             "__id__": 235
           },
           "_spriteFrame": {
-            "__uuid__": "20dao2UftNOp+OvJDvV5se"
+            "__uuid__": "a2MjXRFdtLlYQ5ouAFv/+R"
           },
           "_sizeMode": 0
         },
@@ -12034,6 +12095,58 @@
           "__type__": "cc.Widget",
           "node": {
             "__id__": 235
+          },
+          "_alignFlags": 45,
+          "_originalWidth": 100,
+          "_originalHeight": 100
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "7eS7EOgmJDKpEhapsCbNjb"
+        },
+        "fileId": "5caJVp+jdEKKvJE0gysqeN"
+      },
+      "_opacity": 0,
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 1280,
+        "height": 720
+      },
+      "_scale": {
+        "__type__": "cc.Vec3",
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "Left",
+      "_objFlags": 512,
+      "_parent": {
+        "__id__": 1
+      },
+      "_level": 2,
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 236
+          },
+          "_spriteFrame": {
+            "__uuid__": "20dao2UftNOp+OvJDvV5se"
+          },
+          "_sizeMode": 0
+        },
+        {
+          "__type__": "cc.Widget",
+          "node": {
+            "__id__": 236
           },
           "_alignFlags": 37,
           "_left": -100,
@@ -12044,7 +12157,7 @@
         {
           "__type__": "c64fcoDOyNPZbGi3+VHD13I",
           "node": {
-            "__id__": 235
+            "__id__": 236
           },
           "sampleCount": 200
         }
@@ -12092,7 +12205,7 @@
         {
           "__type__": "cc.Sprite",
           "node": {
-            "__id__": 236
+            "__id__": 237
           },
           "_spriteFrame": {
             "__uuid__": "20dao2UftNOp+OvJDvV5se"
@@ -12102,7 +12215,7 @@
         {
           "__type__": "cc.Widget",
           "node": {
-            "__id__": 236
+            "__id__": 237
           },
           "_alignFlags": 13,
           "_left": 1,
@@ -12112,7 +12225,7 @@
         {
           "__type__": "c64fcoDOyNPZbGi3+VHD13I",
           "node": {
-            "__id__": 236
+            "__id__": 237
           },
           "sampleCount": 200
         }
@@ -12159,7 +12272,7 @@
         {
           "__type__": "cc.Sprite",
           "node": {
-            "__id__": 237
+            "__id__": 238
           },
           "_spriteFrame": {
             "__uuid__": "cd74eGqiVPHo5yvIY1Zzdc"
@@ -12169,7 +12282,7 @@
         {
           "__type__": "cc.Widget",
           "node": {
-            "__id__": 237
+            "__id__": 238
           },
           "_alignFlags": 44,
           "_top": -67,
@@ -12181,7 +12294,7 @@
         {
           "__type__": "c64fcoDOyNPZbGi3+VHD13I",
           "node": {
-            "__id__": 237
+            "__id__": 238
           },
           "sampleCount": 200
         }
@@ -12228,7 +12341,7 @@
         {
           "__type__": "cc.Sprite",
           "node": {
-            "__id__": 238
+            "__id__": 239
           },
           "_spriteFrame": {
             "__uuid__": "032dq0V51En7eV7fZhROWy"
@@ -12238,7 +12351,7 @@
         {
           "__type__": "cc.Widget",
           "node": {
-            "__id__": 238
+            "__id__": 239
           },
           "_alignFlags": 41,
           "_top": 1,
@@ -12250,7 +12363,7 @@
         {
           "__type__": "c64fcoDOyNPZbGi3+VHD13I",
           "node": {
-            "__id__": 238
+            "__id__": 239
           },
           "sampleCount": 200
         }

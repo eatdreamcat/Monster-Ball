@@ -40,3 +40,4 @@ if (CC_DEBUG) {
 CAMERA_SHOW_ALL = false;
 INVINCIBLE = false;
 PXIEL = false;
+GUIDE = false;
