@@ -1,0 +1,332 @@
+{
+  "__type__": "cc.JsonAsset",
+  "_name": "Monster_ball_paly_level",
+  "json": [
+    {
+      "ID": "1-1",
+      "form": 1,
+      "map": 6001,
+      "hp": 50,
+      "monster1": [
+        "1011|1"
+      ],
+      "monste_max": 2,
+      "ball": [
+        "2001|2"
+      ],
+      "score": 10,
+      "hp_mini": 25,
+      "subjoin": 5
+    },
+    {
+      "ID": "1-2",
+      "form": 1,
+      "map": 6001,
+      "hp": 50,
+      "monster1": [
+        "1011|2"
+      ],
+      "monste_max": 2,
+      "ball": [
+        "2001|2"
+      ],
+      "score": 12,
+      "hp_mini": 25,
+      "subjoin": 6
+    },
+    {
+      "ID": "1-3",
+      "form": 1,
+      "map": 6001,
+      "hp": 50,
+      "monster1": [
+        "1011|3"
+      ],
+      "monste_max": 3,
+      "ball": [
+        "2001|2"
+      ],
+      "prop": [
+        "3004|1"
+      ],
+      "prop_max": 2,
+      "score": 14,
+      "hp_mini": 25,
+      "subjoin": 7
+    },
+    {
+      "ID": "1-4",
+      "form": 1,
+      "map": 6001,
+      "hp": 50,
+      "monster1": [
+        "1011|1"
+      ],
+      "monster2": [
+        "1012|1"
+      ],
+      "monste_max": 2,
+      "ball": [
+        "2001|3"
+      ],
+      "score": 16,
+      "hp_mini": 25,
+      "subjoin": 8
+    },
+    {
+      "ID": "1-5",
+      "form": 1,
+      "map": 6001,
+      "hp": 50,
+      "monster1": [
+        "1012|2"
+      ],
+      "monste_max": 3,
+      "ball": [
+        "2001|3"
+      ],
+      "prop": [
+        "3004|1"
+      ],
+      "prop_max": 2,
+      "score": 18,
+      "hp_mini": 25,
+      "subjoin": 9
+    },
+    {
+      "ID": "1-6",
+      "form": 1,
+      "map": 6001,
+      "hp": 100,
+      "monster1": [
+        "1012|1"
+      ],
+      "monster2": [
+        "1011|2"
+      ],
+      "monste_max": 3,
+      "ball": [
+        "2001|3"
+      ],
+      "score": 20,
+      "hp_mini": 25,
+      "subjoin": 10
+    },
+    {
+      "ID": "1-7",
+      "form": 1,
+      "map": 6001,
+      "hp": 100,
+      "monster1": [
+        "1013|1"
+      ],
+      "monster2": [
+        "1011|2"
+      ],
+      "monste_max": 3,
+      "ball": [
+        "2001|4"
+      ],
+      "prop": [
+        "3004|2"
+      ],
+      "prop_max": 2,
+      "score": 22,
+      "hp_mini": 25,
+      "subjoin": 11
+    },
+    {
+      "ID": "1-8",
+      "form": 1,
+      "map": 6001,
+      "hp": 100,
+      "monster1": [
+        "1012|2"
+      ],
+      "monster2": [
+        "1011|2"
+      ],
+      "monste_max": 3,
+      "ball": [
+        "2001|3",
+        "2002|1"
+      ],
+      "prop": [
+        "3003|1"
+      ],
+      "score": 24,
+      "hp_mini": 25,
+      "subjoin": 12
+    },
+    {
+      "ID": "1-9",
+      "form": 1,
+      "map": 6001,
+      "hp": 100,
+      "monster1": [
+        "1011|3"
+      ],
+      "monster2": [
+        "1012|2"
+      ],
+      "monste_max": 3,
+      "ball": [
+        "2001|4",
+        "2002|2"
+      ],
+      "prop": [
+        "3001|1",
+        "3004|1",
+        "3003|1"
+      ],
+      "prop_max": 1,
+      "score": 26,
+      "hp_mini": 25,
+      "subjoin": 13
+    },
+    {
+      "ID": "1-10",
+      "form": 1,
+      "map": 6001,
+      "hp": 100,
+      "monster1": [
+        "1011|2"
+      ],
+      "monster2": [
+        "1011|3"
+      ],
+      "monste_max": 4,
+      "ball": [
+        "2001|4",
+        "2002|3"
+      ],
+      "score": 28,
+      "hp_mini": 25,
+      "subjoin": 14
+    },
+    {
+      "ID": "1-11",
+      "form": 1,
+      "map": 6001,
+      "hp": 100,
+      "monster1": [
+        "1013|1"
+      ],
+      "monster2": [
+        "1011|3"
+      ],
+      "monste_max": 4,
+      "ball": [
+        "2001|4",
+        "2002|3"
+      ],
+      "prop": [
+        "3004|2"
+      ],
+      "prop_max": 2,
+      "score": 30,
+      "hp_mini": 25,
+      "subjoin": 15
+    },
+    {
+      "ID": "1-12",
+      "form": 1,
+      "map": 6001,
+      "hp": 120,
+      "monster1": [
+        "1015|1"
+      ],
+      "monster2": [
+        "1012|3"
+      ],
+      "monste_max": 4,
+      "ball": [
+        "2001|4",
+        "2002|3"
+      ],
+      "prop": [
+        "3002|1"
+      ],
+      "prop_max": 1,
+      "score": 32,
+      "hp_mini": 25,
+      "subjoin": 16
+    },
+    {
+      "ID": "1-13",
+      "form": 2,
+      "map": 6001,
+      "hp": 150,
+      "monster1": [
+        "1016|1"
+      ],
+      "monste_max": 1,
+      "ball": [
+        "2001|4",
+        "2002|3",
+        "2003|1"
+      ],
+      "prop": [
+        "3001|1",
+        "3002|1",
+        "3003|1"
+      ],
+      "prop_max": 2,
+      "score": 40,
+      "hp_mini": 40,
+      "subjoin": 20
+    },
+    {
+      "ID": "2-1",
+      "form": 1,
+      "map": 6002,
+      "hp": 50,
+      "monster1": [
+        "1011|3"
+      ],
+      "monster2": [
+        "1012|3"
+      ],
+      "monste_max": 4,
+      "ball": [
+        "2001|4",
+        "2002|2"
+      ],
+      "score": 43,
+      "hp_mini": 35,
+      "subjoin": 21
+    },
+    {
+      "ID": "2-2",
+      "form": 1,
+      "map": 6002,
+      "hp": 70,
+      "monster1": [
+        "1013|2"
+      ],
+      "monster2": [
+        "1012|2"
+      ],
+      "monster3": [
+        "1011|2"
+      ],
+      "monste_max": 2,
+      "ball": [
+        "2001|4",
+        "2002|2"
+      ],
+      "prop": [
+        "3004|2",
+        "3003|1",
+        "3001|1"
+      ],
+      "prop_max": 2,
+      "score": 46,
+      "hp_mini": 35,
+      "subjoin": 22
+    },
+    {
+      "hp": 70
+    }
+  ]
+}
