@@ -1,0 +1,1 @@
+{"__type__":"cc.JsonAsset","_name":"Monster_ball_ball","json":[{"ID":2001,"name":"普通球","form":1,"continue":0,"lifetime":0,"attack":5,"durable":99999,"combo":5},{"ID":2002,"name":"火箭","form":2,"continue":0,"lifetime":10,"attack":30,"durable":1,"combo":10},{"ID":2003,"name":"麻醉球","form":3,"continue":5,"lifetime":15,"attack":5,"durable":10,"combo":15}]}

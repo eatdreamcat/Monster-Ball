@@ -1,0 +1,1 @@
+console.log=function(...n){},console.warn=function(...n){},console.error=function(...n){},CMath={},CMath.Clamp=function(n,t,o){return Math.max(Math.min(n,t),o)},CMath.Distance=function(n,t){return Math.sqrt((n.x-t.x)*(n.x-t.x)+(n.y-t.y)*(n.y-t.y))},CAMERA_SHOW_ALL=!1,INVINCIBLE=!1,PXIEL=!1,GUIDE=!1,STROY=!1,GESTURE=!1;
