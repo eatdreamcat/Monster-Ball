@@ -1637,7 +1637,7 @@ window.__require = function e(t, n, r) {
       });
       GameFactory.prototype.init = function(callback) {
         this.doneCallback = callback;
-        this.initMonsters(5);
+        this.initMonsters(10);
         this.initBalls(3);
         this.initBackground(1);
         this.initItems(3);
@@ -3714,7 +3714,7 @@ window.__require = function e(t, n, r) {
         console.log("play:" + clipName);
         var state = this.animation.getAnimationState(clipName);
         var self = this;
-        if (null === state) cc.loader.loadRes("Animation/Monster/" + this.monster.MonsterID + "/" + Game_1.Game.sceneID + "/" + clipName, cc.AnimationClip, function(err, clip) {
+        if (null === state && this.monster) cc.loader.loadRes("Animation/Monster/" + this.monster.MonsterID + "/" + Game_1.Game.sceneID + "/" + clipName, cc.AnimationClip, function(err, clip) {
           if (err) console.error(err); else {
             self.animation.addClip(clip);
             var state_1 = self.animation.play(clip.name, startTime);
@@ -3852,7 +3852,7 @@ window.__require = function e(t, n, r) {
         EventManager_1.gEventMgr.on(EventName_1.GlobalEvent.MONSTER_DIE, this.die, this);
         EventManager_1.gEventMgr.on(EventName_1.GlobalEvent.MONSTER_UPDATE_STAGE, this.updateStage, this);
         EventManager_1.gEventMgr.on(EventName_1.GlobalEvent.MONSTER_NUMB, function(isNumb, monsterID) {
-          if (_this.monster.MonsterID != monsterID) return;
+          if (!_this.monster || _this.monster.MonsterID != monsterID) return;
           console.log(" is Numbe :", isNumb);
           if (_this.splash.node.active && isNumb) return;
           if (isNumb) {
